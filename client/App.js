@@ -15,6 +15,13 @@ const App = () => {
     setPlayers(playerArray); //array of player objects
   };
 
+  const selectPlayer = async (playerId) => {
+    const response = await axios.get(`/api/players/${playerId}`);
+    const playerAndTheirGames = await response.data; //why did this change from response.data?
+    setSelectedPlayer(playerAndTheirGames);
+  };
+
+  //resets 'selected player' to no one when home is clicked
   const handleReset = () => {
     setSelectedPlayer({});
   };
@@ -38,23 +45,25 @@ const App = () => {
       </div>
 
       <Routes>
-        <Route path="/" element={<p>Home Page</p>} />
         <Route
           exact
           path="/leaderboard"
           element={
             <Leaderboard
               players={players}
+              selectPlayer={selectPlayer}
               selectedPlayer={selectedPlayer}
               setSelectedPlayer={setSelectedPlayer}
+              player={selectedPlayer}
             />
           }
         />
         <Route
-          path={`/leaderboard/${selectedPlayer}`}
-          element={<SinglePlayer player={selectedPlayer} />}
+          path={`/leaderboard/:playerId`}
+          element={<SinglePlayer selectedPlayer={selectedPlayer} />}
         />
-        <Route exact path="/play" element={<Play />} />
+        {/* <Route exact path="/play" element={<Play />} /> */}
+        <Route path="/" element={<p>Home Page</p>} />
       </Routes>
     </div>
   );
