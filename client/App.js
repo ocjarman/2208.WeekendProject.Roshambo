@@ -19,26 +19,29 @@ const App = () => {
   const [players, setPlayers] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState({});
 
+  //get all players for Leaderboard page
   const getPlayers = async () => {
     const response = await axios.get("/api/players");
     const playerArray = await response.data;
     setPlayers(playerArray); //array of player objects
   };
 
+  //useEffect runs on loading page
+  useEffect(() => {
+    getPlayers();
+  }, []);
+
+  //get data for selected player when user clicks on player
   const selectPlayer = async (playerId) => {
     const response = await axios.get(`/api/players/${playerId}`);
     const playerAndTheirGames = await response.data; //why did this change from response.data?
     setSelectedPlayer(playerAndTheirGames);
   };
 
-  //resets 'selected player' to no one when home is clicked
+  //resets 'selected player' to empty object when 'home' button is clicked
   const handleReset = () => {
     setSelectedPlayer({});
   };
-
-  useEffect(() => {
-    getPlayers();
-  }, []);
 
   return (
     <div className="row container" style={pageStyle}>
@@ -46,12 +49,15 @@ const App = () => {
         <Link to={"/"}>
           <button onClick={handleReset}>Home</button>
         </Link>
+
         <Link to={"/leaderboard"}>
           <button>Leaderboard</button>
         </Link>
+
         <Link to={"/create-player"}>
           <button>New Player</button>
         </Link>
+
         {/* <Link to={"/play"}>
           <button>Play</button>
         </Link> */}

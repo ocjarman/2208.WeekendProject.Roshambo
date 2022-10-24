@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 
 //list of all players provided to leaderboard
 const AllPlayers = (props) => {
+
+    //providing a list of all players
+    //Player component needs 
 const { players, selectPlayer, selectedPlayer } = props;
 
     return (
