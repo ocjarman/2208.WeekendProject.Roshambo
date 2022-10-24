@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes, Link } from "react-router-dom";
-import Leaderboard from "./Leaderboard.jsx";
-import SinglePlayer from "./SinglePlayer.jsx";
-import Play from "./Play.jsx";
+import Leaderboard from "./components/Leaderboard.jsx";
+import SinglePlayer from "./components/SinglePlayer.jsx";
+import Play from "./components/Play.jsx";
 import axios from "axios";
+import CreatePlayer from "./components/CreatePlayer.jsx";
+
+const pageStyle = {
+  display: "flex",
+  flexDirection: "column",
+  backgroundColor: "aliceBlue",
+  fontFamily: "Courier",
+  fontSize: "20px",
+  textAlign: "center",
+};
 
 const App = () => {
   const [players, setPlayers] = useState([]);
@@ -31,7 +41,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="row container">
+    <div className="row container" style={pageStyle}>
       <div id="buttons">
         <Link to={"/"}>
           <button onClick={handleReset}>Home</button>
@@ -39,12 +49,16 @@ const App = () => {
         <Link to={"/leaderboard"}>
           <button>Leaderboard</button>
         </Link>
-        <Link to={"/play"}>
-          <button>Play</button>
+        <Link to={"/create-player"}>
+          <button>New Player</button>
         </Link>
+        {/* <Link to={"/play"}>
+          <button>Play</button>
+        </Link> */}
       </div>
 
       <Routes>
+        <Route path="/" element={<h1>Home Page</h1>} />
         <Route
           exact
           path="/leaderboard"
@@ -63,7 +77,8 @@ const App = () => {
           element={<SinglePlayer selectedPlayer={selectedPlayer} />}
         />
         {/* <Route exact path="/play" element={<Play />} /> */}
-        <Route path="/" element={<p>Home Page</p>} />
+        <Route path="/create-player" element={<CreatePlayer />} />
+        <Route path="/play" element={<Play />} />
       </Routes>
     </div>
   );

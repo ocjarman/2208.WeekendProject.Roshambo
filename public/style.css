@@ -4,9 +4,16 @@
 }
 
 body {
-  font-family: 'Open Sans', arial, sans-serif;
+  font-family: "Open Sans", arial, sans-serif;
   margin: 0;
   height: 100vh;
   width: 100vw;
-  background: cornSilk;
+  background: aliceblue;
+}
+
+button {
+  display: inline-flex;
+  padding: 20px;
+  margin: 20px;
+  font-size: 20px;
 }

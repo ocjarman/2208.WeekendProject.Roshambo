@@ -34,7 +34,7 @@ router.put("/:playerId", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   const { username } = req.body;
 
-  const newPlayer = await player.create({
+  const newPlayer = await Player.create({
     username,
   });
 

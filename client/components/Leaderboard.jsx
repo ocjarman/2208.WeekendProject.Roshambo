@@ -13,7 +13,7 @@ const leaderboardStyle = {
 
 const Leaderboard = (props) => {
 
-    const  {players, selectedPlayer, selectPlayer, setSelectedPlayer} = props    
+    const  {players, selectedPlayer, selectPlayer} = props    
 
     return (
         <div id='players_list' style={leaderboardStyle}>

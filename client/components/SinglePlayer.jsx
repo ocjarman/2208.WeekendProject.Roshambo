@@ -4,9 +4,7 @@ import PropTypes from 'prop-types'
 
 const SinglePlayer = (props) => {
     const { selectedPlayer } = props;
-    console.log('selectedPlayer in single player', selectedPlayer)
-    // const gamesArray = selectedPlayer.games
-    // console.log(gamesArray)
+  
     return (
         <div className='player'>
            <p>{selectedPlayer.id} - {selectedPlayer.username}</p>
@@ -28,4 +26,3 @@ SinglePlayer.propTypes = {
     selectedPlayer: PropTypes.object,
 }
 
-// onClick={() => selectPlayer(player.id)}
