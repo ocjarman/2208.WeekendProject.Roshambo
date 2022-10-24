@@ -51,7 +51,6 @@ const App = () => {
           }
         />
         <Route
-          exact
           path={`/leaderboard/${selectedPlayer}`}
           element={<SinglePlayer player={selectedPlayer} />}
         />
