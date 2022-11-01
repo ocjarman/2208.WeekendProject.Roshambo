@@ -1,30 +1,36 @@
 import React from "react";
-import Player from "./Player.jsx";
-import PropTypes from 'prop-types';
+import PlayerCard from "./PlayerCard.jsx";
+import { useState, useEffect } from "react";
+import { setPlayerList } from "../features/playerSlice";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 //list of all players provided to leaderboard
-const AllPlayers = (props) => {
-
-    //providing a list of all players
-    //Player component needs 
-const { players, selectPlayer, selectedPlayer } = props;
+const AllPlayers = () => {
+    const players = useSelector((state) => state.players.playerList)
+    const dispatch = useDispatch()
+    const getPlayers = async () => {
+      const response = await axios.get("/api/players");
+      dispatch(setPlayerList(response.data)); //array of player objects
+    };
+  
+    //useEffect runs on loading page one time, doesnt update unless props are inside of the array/second arg
+    useEffect(() => {
+      getPlayers();
+    }, []);
 
     return (
-        <div id='players'>
-        { players.map((player) => { 
-            return <Player 
-                key={player.id} 
-                player={player}
-                selectPlayer={selectPlayer}
-                selectedPlayer={selectedPlayer}/>})}      
+        <div>
+            <h1>Leaderboard: </h1>
+            <h3>Players: </h3>
+            <div>
+            { players.map((player) => (
+                <PlayerCard key={player.id} player={player}/>
+            ))}      
+            </div>
         </div>
     )
 }
 
 export default AllPlayers;
 
-AllPlayers.propTypes = {
-    players: PropTypes.array,
-    selectPlayer: PropTypes.func,
-    selectedPlayer: PropTypes.object
-}

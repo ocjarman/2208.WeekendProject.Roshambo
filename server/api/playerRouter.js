@@ -41,4 +41,15 @@ router.post("/", async (req, res, next) => {
   res.status(204).send(newPlayer);
 });
 
+// DELETE /api/todos/:id
+router.delete("/:id", async (req, res, next) => {
+  try {
+    const player = await Player.findByPk(req.params.id);
+    await player.destroy();
+    res.send(player);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

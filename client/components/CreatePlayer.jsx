@@ -1,50 +1,41 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { createPlayer } from "../features/playerSlice";
 
 
-// Displays a small form with two items:
-// Username text input: decides the new users  username
-// Submit button: Makes a post request to /api/players sending up the players username
-
-const formStyles = {
-    display: 'flex',
-    flexDirection: "column",
-    padding: '20px',
-    width: '50%'
-}
 const CreatePlayer = () => {
-
     const [username, setUsername] = useState("");
-    const [isValidUsername, setIsValidUsername] = useState(false);
   
-    const newUsername = (event) => {
-      setUsername(event.target.value);
-      if (username.length < 3) setIsValidUsername(false);
-      else setIsValidUsername(true);
-    };
+    const dispatch = useDispatch("")
+    const navigate = useNavigate()
 
-   
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("submitting!");
-        const body = {username: username}
-        const response = await axios.post('/api/players', body)
-        console.log(await response)
+        const { data: created } = await axios.post('/api/players', {
+          username
+        })
+            //update front end and redux store
+        dispatch(createPlayer(created))
+        navigate('/players')
       };
 
+
+    const newUsername = (event) => {
+      setUsername(event.target.value);
+    };
+
     return (
-      <form style={formStyles} onSubmit={handleSubmit}> 
+      <form id="submit-form" onSubmit={handleSubmit}> 
       <label>
         username: 
         <input type="text" value={username} onChange={newUsername} />
-        {!isValidUsername && <p>your username needs to be more than 3 characters!</p>}
       </label>
-
       <button type="submit" >Create Player</button>
     </form>
     );
   };
 
 export default CreatePlayer;
-

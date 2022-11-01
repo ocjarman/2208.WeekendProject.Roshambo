@@ -16,4 +16,26 @@ button {
   padding: 20px;
   margin: 20px;
   font-size: 20px;
+  border-radius: 10px;
+  border: 2px solid coral;
+}
+
+#players {
+  margin: 0 auto;
+  width: 500px;
+}
+
+#players_list,
+#single-player-link {
+  text-decoration: none;
+  color: black;
+}
+
+.single_player_games {
+  width: 200px;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
 }
