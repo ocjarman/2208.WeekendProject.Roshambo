@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Route, Routes, Link } from "react-router-dom";
-import Player from "./components/PlayerCard.jsx";
 import CreatePlayer from "./components/CreatePlayer.jsx";
 import AllPlayers from "./components/AllPlayers.jsx";
 import SelectedPlayerById from "./components/SelectedPlayerById.js";

@@ -1,6 +1,6 @@
 import React from "react";
 import PlayerCard from "./PlayerCard.jsx";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { setPlayerList } from "../features/playerSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -8,10 +8,12 @@ import axios from "axios";
 //list of all players provided to leaderboard
 const AllPlayers = () => {
     const players = useSelector((state) => state.players.playerList)
+    //why does dispatch sometimes need "" inside and sometimes not?
     const dispatch = useDispatch()
     const getPlayers = async () => {
       const response = await axios.get("/api/players");
-      dispatch(setPlayerList(response.data)); //array of player objects
+      //array of player objects updated in store and front end
+      dispatch(setPlayerList(response.data)); 
     };
   
     //useEffect runs on loading page one time, doesnt update unless props are inside of the array/second arg

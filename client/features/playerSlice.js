@@ -21,7 +21,6 @@ export const playerSlice = createSlice({
       });
     },
     setSelectedPlayer: (state, action) => {
-      //changed 'todo' to 'selectedTodo'
       state.selectedPlayer = action.payload;
     },
   },
